@@ -22,12 +22,12 @@ export class TaskService {
   }
 
   getTaskPending(): Task[] {
-    const tasksPendingLocal = localStorage.getItem('tasksPendingLocal');
+    const tasksPendingLocal = localStorage.getItem('tasksPendingLocal') || '[]';
     return JSON.parse(tasksPendingLocal);
   }
 
   getTaskCompleted(): Task[] {
-    const tasksCompletedLocal = localStorage.getItem('tasksCompletedLocal');
+    const tasksCompletedLocal = localStorage.getItem('tasksCompletedLocal') || '[]';
     return JSON.parse(tasksCompletedLocal);
   }
 

@@ -16,6 +16,8 @@ export class TaskListComponent implements OnInit {
   public showTaskCompleted: boolean;
 
   constructor(private _taskService: TaskService) {
+    this.taskListPending = [];
+    this.taskListCompleted = [];
   }
 
   ngOnInit() {

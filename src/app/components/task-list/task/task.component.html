@@ -4,7 +4,7 @@
   </div>
 
   <div class="block-description p-1"
-       [ngClass]="{'col-7': !task.completed, 'col-8':task-completed}"
+       [ngClass]="{'col-7': !task.completed, 'col-8':task.completed}"
        [title]="task.description">
     {{task.description}}
   </div>
