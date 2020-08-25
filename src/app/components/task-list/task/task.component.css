@@ -1,0 +1,14 @@
+.block-date, .block-description, .block-actions{
+  text-align: center;
+}
+
+.block-description{
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.icon-action{
+  font-size: 32px;
+  cursor: pointer;
+  margin-right: 5px;
+}

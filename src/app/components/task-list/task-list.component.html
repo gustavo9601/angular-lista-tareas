@@ -1,0 +1,77 @@
+<div class="row mt-5 mb-5 p-1 rounded-lg" id="task-list">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-12">
+        <h2>Tareas Pendientes</h2>
+      </div>
+      <div class="col-12 mb-3">
+        <div *ngIf="taskListPending.length == 0" class="text-center mb-3 border">
+          <h1><i class="fa fa-bullhorn" aria-hidden="true"></i></h1>
+          <p>No tienes tareas pendientes!!!</p>
+        </div>
+        <div *ngIf="taskListPending.length > 0" class="text-center border">
+          <div class="row no-gutters">
+            <div class="col-3 block-date">
+              <strong>Fecha</strong>
+            </div>
+            <div class="col-7 block-description" >
+              <p><strong>Descripción</strong></p>
+            </div>
+            <div class="col-2 block-actions">
+              <p><strong><i class="fa fa-bars"></i></strong></p>
+            </div>
+          </div>
+          <hr>
+          <app-task *ngFor="let task of taskListPending;let i = index"
+                    [task]="task" [index]="i"
+                    (completed)="receiveEmitEvent('completed', $event)"
+                    (remove)="receiveEmitEvent('remove', $event)"></app-task>
+        </div>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-dark" (click)="showInputTask=true" ><i class="fa fa-plus" aria-hidden="true"></i> Agregar tarea</button>
+      </div>
+      <div class="col-12" *ngIf="showInputTask">
+        <div class="input-group mt-2 mb-2">
+          <input type="text" name="task" id="task" #task class="form-control" [class.alert-danger]="errorInput"  (keydown.enter)="addTask(task.value);task.value=''" >
+          <span class="input-group" class="btn btn-dark rounded-0"
+                (click)="addTask(task.value);task.value=''">Añadir</span>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <h2>Tareas Completadas</h2>
+      </div>
+      <div class="col-12 mb-3" *ngIf="taskListCompleted.length > 0">
+        <button class="btn btn-dark" (click)="showTaskCompleted=!showTaskCompleted">
+          <ng-container *ngIf="showTaskCompleted"><i class="fa fa-eye-slash" aria-hidden="true"></i> Ocultar tareas completadas</ng-container>
+          <ng-container *ngIf="!showTaskCompleted"><i class="fa fa-eye" aria-hidden="true"></i> Mostrar tareas completadas</ng-container>
+        </button>
+      </div>
+      <div class="col-12">
+        <div *ngIf="taskListCompleted.length == 0" class="text-center border">
+          <h1><i class="fa fa-bullhorn" aria-hidden="true"></i></h1>
+          <p>No tienes tareas Completadas!!!</p>
+        </div>
+        <div *ngIf="taskListCompleted.length > 0 && showTaskCompleted" class="text-center border">
+          <div class="row no-gutters">
+            <div class="col-3 block-date">
+              <strong>Fecha</strong>
+            </div>
+            <div class="col-8 block-description" >
+              <p><strong>Descripción</strong></p>
+            </div>
+          </div>
+          <hr>
+          <app-task *ngFor="let task of taskListCompleted;let i = index"
+                    [task]="task" [index]="i"></app-task>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="btn btn-danger btn-block" (click)="deleteAllTasks()">Eliminar Tareas</div>
+  </div>
+</div>
